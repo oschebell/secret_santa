@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Giver:</strong>
+  <%= @assignment.giver_id %>
+</p>
+
+<p>
+  <strong>Receiver:</strong>
+  <%= @assignment.receiver_id %>
+</p>
+
+<%= link_to 'Edit', edit_assignment_path(@assignment) %> |
+<%= link_to 'Back', assignments_path %>
