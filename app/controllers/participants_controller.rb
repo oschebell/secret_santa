@@ -9,13 +9,13 @@ class ParticipantsController < ApplicationController
 
     def assign_santas
       secret_santas = Participant.all.shuffle.zip(Participant.all)
-      secret_santas.each do |santa_pair|
-        giver = santa_pair[0]
-        receiver = santa_pair[1]
+      secret_santas.each do |giver, receiver|
         Assignment.create! giver: giver, receiver: receiver
       end
       redirect_to(assignments_path)
     end
+
+
 
   def index
     @participants = Participant.all
