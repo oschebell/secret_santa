@@ -5,10 +5,17 @@ class ParticipantsController < ApplicationController
   # GET /participants
   # GET /participants.json
 
-  def assign_santas
-    @assign_santas = Participant.all.shuffle.zip(Participant.all)
-    redirect_to index_path
-  end
+
+
+    def assign_santas
+      secret_santas = Participant.all.shuffle.zip(Participant.all)
+      secret_santas.each do |santa_pair|
+        giver = santa_pair[0]
+        receiver = santa_pair[1]
+        Assignment.create! giver: giver, receiver: receiver
+      end
+      redirect_to(assignments_path)
+    end
 
   def index
     @participants = Participant.all
@@ -50,7 +57,7 @@ class ParticipantsController < ApplicationController
     respond_to do |format|
       if @participant.update(participant_params)
         format.html { redirect_to @participant, notice: 'Participant was successfully updated.' }
-        format.json { render :show, status: :ok, location: @participant }
+
       else
         format.html { render :edit }
         format.json { render json: @participant.errors, status: :unprocessable_entity }

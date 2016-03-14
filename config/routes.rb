@@ -2,7 +2,9 @@ Rails.application.routes.draw do
   resources :assignments
 
   resources :participants do
+    collection do
       get 'assign_santas'
+    end
   end
 
   # The priority is based upon order of creation: first created -> highest priority.
