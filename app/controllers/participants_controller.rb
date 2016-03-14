@@ -1,9 +1,15 @@
 class ParticipantsController < ApplicationController
-  
+
   before_action :set_participant, only: [:show, :edit, :update, :destroy]
 
   # GET /participants
   # GET /participants.json
+
+  def assign_santas
+    @assign_santas = Participant.all.shuffle.zip(Participant.all)
+    redirect_to index_path
+  end
+
   def index
     @participants = Participant.all
   end
